@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"]</title>
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <link href="~/Content/site.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark nav-pills">
+        <a class="navbar-brand" href="#">Chess Game</a>
+        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+        <a class="nav-link" asp-controller="Player" asp-action="Index">Players</a>
+        <a class="nav-link" asp-controller="Game" asp-action="Index">Games</a>
+    </nav>
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-md-12">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</body>
+
+@RenderSection("Scripts", required: false)
+</html>

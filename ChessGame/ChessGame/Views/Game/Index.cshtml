@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Game>
+
+@{
+    ViewData["Title"] = "View Games";
+}
+
+<h4>View Games</h4>
+
+<div class="row mb-1">
+    <div class="col"><a asp-action="Create">Create New Game</a></div>
+    <div class="col text-right">
+        <form asp-action="Index" method="get">
+            <input type="text" name="searchTerm" value="@ViewData["SearchTerm"]" placeholder="Filter by player name or opening classification" />
+            <input type="submit" value="Filter" />
+            @{ if (!string.IsNullOrWhiteSpace(@ViewData["SearchTerm"] as string))
+                {
+                    <a asp-action="Index">Reset filter</a>
+                }
+            }
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.WhitePlayerId)</th>
+            <th>@Html.DisplayNameFor(model => model.BlackPlayerId)</th>
+            <th>@Html.DisplayNameFor(model => model.OpeningClassification)</th>
+            <th>@Html.DisplayNameFor(model => model.Result)</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    @foreach (var game in Model)
+    {
+<tr>
+    <td scope="row">@game.Id</td>
+    <td>@game.WhitePlayerId</td>
+    <td>@game.BlackPlayerId</td>
+    <td>@game.OpeningClassification</td>
+    <td>@EnumHelpers.GetDisplayName(game.Result)</td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@game.Id">Edit</a>
+        <a asp-action="Delete" asp-route-id="@game.Id">Delete</a>
+    </td>
+</tr>
+    }
+</table>

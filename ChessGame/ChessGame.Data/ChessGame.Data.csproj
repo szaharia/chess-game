@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210213220345_InitialMigration.cs" />
+    <Compile Remove="Migrations\20210213220345_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210213221311_PlayerSeedDataAdded.cs" />
+    <Compile Remove="Migrations\20210213221311_PlayerSeedDataAdded.Designer.cs" />
+    <Compile Remove="Migrations\20210213221641_AddPlayerValidation.cs" />
+    <Compile Remove="Migrations\20210213221641_AddPlayerValidation.Designer.cs" />
+    <Compile Remove="Migrations\20210213223633_AddGameData.cs" />
+    <Compile Remove="Migrations\20210213223633_AddGameData.Designer.cs" />
+    <Compile Remove="Migrations\20210213224102_AddGameData1.cs" />
+    <Compile Remove="Migrations\20210213224102_AddGameData1.Designer.cs" />
+    <Compile Remove="Migrations\20210213225401_InitialMigration.cs" />
+    <Compile Remove="Migrations\20210213225401_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210213231343_InitialMigration1.cs" />
+    <Compile Remove="Migrations\20210213231343_InitialMigration1.Designer.cs" />
+    <Compile Remove="Migrations\20210213234207_InitialMigration1.cs" />
+    <Compile Remove="Migrations\20210213234207_InitialMigration1.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChessGame.CrossCut\ChessGame.CrossCut.csproj" />
+    <ProjectReference Include="..\ChessGame.Data.Contracts\ChessGame.Data.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

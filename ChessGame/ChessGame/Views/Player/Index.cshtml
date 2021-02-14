@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Player>
+
+@{
+    ViewData["Title"] = "View Players";
+}
+
+<h4>View Players</h4>
+
+<div class="row mb-1">
+    <div class="col"><a asp-action="Create">Create New Player</a></div>
+    <div class="col text-right">
+        <form asp-action="Index" method="get">
+                <input type="text" name="searchTerm" value="@ViewData["SearchTerm"]" placeholder="Filter by @Html.DisplayNameFor(model => model.LastName)" />
+                <input type="submit" value="Filter" />
+                @{ if (!string.IsNullOrWhiteSpace(@ViewData["SearchTerm"] as string))
+                    {
+                        <a asp-action="Index">Reset filter</a>
+                    }
+                }
+        </form>
+    </div>
+</div>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
+            <th>@Html.DisplayNameFor(model => model.Rating)</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    @foreach (var player in Model)
+    {
+        <tr>
+            <td scope="row">@player.Id</td>
+            <td>@player.FirstName</td>
+            <td>@player.LastName</td>
+            <td>@player.Rating</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@player.Id">Edit</a>
+                <a asp-action="Delete" asp-route-id="@player.Id">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
