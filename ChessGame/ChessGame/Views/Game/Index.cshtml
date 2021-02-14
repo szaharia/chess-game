@@ -24,7 +24,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Date)</th>
             <th>@Html.DisplayNameFor(model => model.WhitePlayerId)</th>
             <th>@Html.DisplayNameFor(model => model.BlackPlayerId)</th>
             <th>@Html.DisplayNameFor(model => model.OpeningClassification)</th>
@@ -35,7 +35,7 @@
     @foreach (var game in Model)
     {
 <tr>
-    <td scope="row">@game.Id</td>
+    <td scope="row">@game.Date</td>
     <td>@game.WhitePlayerId</td>
     <td>@game.BlackPlayerId</td>
     <td>@game.OpeningClassification</td>

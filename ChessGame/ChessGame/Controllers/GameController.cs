@@ -41,7 +41,7 @@ namespace ChessGame.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("WhitePlayerId,BlackPlayerId,OpeningClassification,Result")] Game game)
+        public async Task<IActionResult> Create([Bind("Date,WhitePlayerId,BlackPlayerId,OpeningClassification,Result")] Game game)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace ChessGame.Controllers
 
 
         [HttpPost, ActionName("Edit")]
-        public async Task<IActionResult> EditPost([Bind("Id,WhitePlayerId,BlackPlayerId,OpeningClassification,Result")] Game game)
+        public async Task<IActionResult> EditPost([Bind("Id,Date,WhitePlayerId,BlackPlayerId,OpeningClassification,Result")] Game game)
         {
             try
             {
