@@ -4,7 +4,7 @@
     ViewData["Title"] = "View Games";
 }
 
-<h4>View Games</h4>
+<h5>View Games</h5>
 
 <div class="row mb-1">
     <div class="col"><a asp-action="Create">Create New Game</a></div>
@@ -29,7 +29,7 @@
             <th>@Html.DisplayNameFor(model => model.BlackPlayerId)</th>
             <th>@Html.DisplayNameFor(model => model.OpeningClassification)</th>
             <th>@Html.DisplayNameFor(model => model.Result)</th>
-            <th>Options</th>
+            <th></th>
         </tr>
     </thead>
     @foreach (var game in Model)
@@ -41,7 +41,7 @@
     <td>@game.OpeningClassification</td>
     <td>@EnumHelpers.GetDisplayName(game.Result)</td>
     <td>
-        <a asp-action="Edit" asp-route-id="@game.Id">Edit</a>
+        <a asp-action="Edit" asp-route-id="@game.Id">Edit</a> | 
         <a asp-action="Delete" asp-route-id="@game.Id">Delete</a>
     </td>
 </tr>

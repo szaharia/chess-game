@@ -4,7 +4,7 @@
     ViewData["Title"] = "View Players";
 }
 
-<h4>View Players</h4>
+<h5>View Players</h5>
 
 <div class="row mb-1">
     <div class="col"><a asp-action="Create">Create New Player</a></div>
@@ -31,7 +31,7 @@
             <th>@Html.DisplayNameFor(model => model.FirstName)</th>
             <th>@Html.DisplayNameFor(model => model.LastName)</th>
             <th>@Html.DisplayNameFor(model => model.Rating)</th>
-            <th>Options</th>
+            <th></th>
         </tr>
     </thead>
     @foreach (var player in Model)
@@ -42,7 +42,7 @@
             <td>@player.LastName</td>
             <td>@player.Rating</td>
             <td>
-                <a asp-action="Edit" asp-route-id="@player.Id">Edit</a>
+                <a asp-action="Edit" asp-route-id="@player.Id">Edit</a> | 
                 <a asp-action="Delete" asp-route-id="@player.Id">Delete</a>
             </td>
         </tr>

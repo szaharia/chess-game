@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ChessGame.Business.Contracts.Models;
 using ChessGame.Business.Contracts.Services;
+using ChessGame.Business.InternalClasses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -52,6 +53,11 @@ namespace ChessGame.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
+            catch (PlayerNotFoundException ex)
+            {
+                _logger.LogError(ex, "The game contains invalid player ids");
+                ModelState.AddModelError("", ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "There was an error creating a new game");
@@ -84,6 +90,11 @@ namespace ChessGame.Controllers
 
                     return RedirectToAction(nameof(Index));
                 }
+            }
+            catch (PlayerNotFoundException ex)
+            {
+                _logger.LogError(ex, "The game contains invalid player ids");
+                ModelState.AddModelError("", ex.Message);
             }
             catch (Exception ex)
             {
