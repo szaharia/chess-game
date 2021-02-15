@@ -25,8 +25,8 @@
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Date)</th>
-            <th>@Html.DisplayNameFor(model => model.WhitePlayerId)</th>
-            <th>@Html.DisplayNameFor(model => model.BlackPlayerId)</th>
+            <th>White Player</th>
+            <th>Black Player</th>
             <th>@Html.DisplayNameFor(model => model.OpeningClassification)</th>
             <th>@Html.DisplayNameFor(model => model.Result)</th>
             <th></th>
@@ -36,8 +36,8 @@
     {
 <tr>
     <td scope="row">@game.Date</td>
-    <td>@game.WhitePlayerId</td>
-    <td>@game.BlackPlayerId</td>
+    <td>@game.WhitePlayer.FirstName @game.WhitePlayer.LastName</td>
+    <td>@game.BlackPlayer.FirstName @game.BlackPlayer.LastName</td>
     <td>@game.OpeningClassification</td>
     <td>@EnumHelpers.GetDisplayName(game.Result)</td>
     <td>

@@ -21,15 +21,23 @@ namespace ChessGame.Data.Repositories
         public async Task<IEnumerable<Game>> FindAsync(string searchTerm)
         {
             return string.IsNullOrWhiteSpace(searchTerm)
-                ? await _dbContext.Games.ToListAsync()
+                ? await _dbContext.Games
+                    .Include(g => g.WhitePlayer).Include(g => g.BlackPlayer).ToListAsync()
                 : await _dbContext.Games
-                    .Where(p => EF.Functions.Like(p.OpeningClassification, $"%{searchTerm}%"))
+                    .Where(p => EF.Functions.Like(p.OpeningClassification, $"%{searchTerm}%")
+                    || EF.Functions.Like(p.WhitePlayer.FirstName, $"%{searchTerm}%")
+                    || EF.Functions.Like(p.WhitePlayer.LastName, $"%{searchTerm}%")
+                    || EF.Functions.Like(p.BlackPlayer.FirstName, $"%{searchTerm}%")
+                    || EF.Functions.Like(p.BlackPlayer.LastName, $"%{searchTerm}%"))
+                    .Include(g => g.WhitePlayer).Include(g => g.BlackPlayer)
                     .ToListAsync();
         }
 
         public async Task<Game> GetByIdAsync(int gameId)
         {
-            return await _dbContext.Games.SingleOrDefaultAsync(g => g.Id == gameId);
+            return await _dbContext.Games
+                .Include(g => g.WhitePlayer).Include(g => g.BlackPlayer)
+                .SingleOrDefaultAsync(g => g.Id == gameId);
         }
 
         public async Task CreateAsync(Game game)
