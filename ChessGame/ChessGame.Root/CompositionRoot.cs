@@ -30,8 +30,13 @@ namespace ChessGame.Root
                     configuration.GetConnectionString("WatersChessGameConnection"),
                     sqlServerOptionsAction => sqlServerOptionsAction.MigrationsAssembly("ChessGame.Data")));
 
+            // force database to start up
+            services.AddHostedService<DatabaseStartup>();
+
             // Automapper
             services.AddAutoMapper(Assembly.GetAssembly(typeof(PlayerService)));
+
+
         }
     }
 }
