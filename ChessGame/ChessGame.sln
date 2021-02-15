@@ -19,9 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessGame.Root", "ChessGame
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessGame.Business.Contracts", "ChessGame.Business.Contracts\ChessGame.Business.Contracts.csproj", "{C286A7F3-B8F1-4569-9D1B-1A91DCD3F3DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessGame.Data.Tests", "ChessGame.Data.Tests\ChessGame.Data.Tests.csproj", "{ACF5A258-15B9-4DCD-B011-043EED86C378}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessGame.Data.Tests", "ChessGame.Data.Tests\ChessGame.Data.Tests.csproj", "{ACF5A258-15B9-4DCD-B011-043EED86C378}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessGame.CrossCut", "ChessGame.CrossCut\ChessGame.CrossCut.csproj", "{F18CA923-0AF4-4AEB-92BC-50426F3E9C75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessGame.CrossCut", "ChessGame.CrossCut\ChessGame.CrossCut.csproj", "{F18CA923-0AF4-4AEB-92BC-50426F3E9C75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessGame.Business.Tests", "ChessGame.Business.Tests\ChessGame.Business.Tests.csproj", "{7FC84DB1-FA22-447E-B120-D3429A459709}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{F18CA923-0AF4-4AEB-92BC-50426F3E9C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F18CA923-0AF4-4AEB-92BC-50426F3E9C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F18CA923-0AF4-4AEB-92BC-50426F3E9C75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FC84DB1-FA22-447E-B120-D3429A459709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC84DB1-FA22-447E-B120-D3429A459709}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC84DB1-FA22-447E-B120-D3429A459709}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC84DB1-FA22-447E-B120-D3429A459709}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
