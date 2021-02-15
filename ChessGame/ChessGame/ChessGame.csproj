@@ -21,8 +21,4 @@
     <ProjectReference Include="..\ChessGame.Root\ChessGame.Root.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="InternalClasses\GameFinder\" />
-  </ItemGroup>
-
 </Project>
