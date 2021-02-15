@@ -13,7 +13,7 @@ namespace ChessGame.Data.Tests
     public class GameRepositoryTests
     {
         [Test]
-        public void GetAllAsync_SearchTermIsNullOrWhiteSpace_ArgumentExceptinIsThrown()
+        public void GetAllAsync_SearchTermIsNullOrWhiteSpace_FullListOfGamesIsReturned()
         {
             // Arrange
             var options = new DbContextOptionsBuilder<AppDbContext>()
@@ -35,9 +35,9 @@ namespace ChessGame.Data.Tests
 
                 // Act
                 // Assert
-                Assert.ThrowsAsync<ArgumentException>(() => gameRepository.FindAsync(null));
-                Assert.ThrowsAsync<ArgumentException>(() => gameRepository.FindAsync(string.Empty));
-                Assert.ThrowsAsync<ArgumentException>(() => gameRepository.FindAsync("  "));
+                Assert.AreEqual(3, gameRepository.FindAsync(null).Result.Count());
+                Assert.AreEqual(3, gameRepository.FindAsync(string.Empty).Result.Count());
+                Assert.AreEqual(3, gameRepository.FindAsync(" ").Result.Count());
             }
         }
 
