@@ -12,5 +12,6 @@ namespace ChessGame.Business.Contracts.Services
         public Task EditAsync(Player player);
         public Task DeleteAsync(int playerId);
         public Task<bool> SaveChangesAsync();
+        public Task<bool> PlayerHasGamesAsync(int playerId);
     }
 }

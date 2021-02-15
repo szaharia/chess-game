@@ -74,5 +74,10 @@ namespace ChessGame.Data.Repositories
         {
             return await _dbContext.SaveChangesAsync() > 0;
         }
+
+        public async Task<bool> PlayerHasGamesAsync(int playerId)
+        {
+            return await _dbContext.Games.AnyAsync(p => p.WhitePlayerId == playerId || p.BlackPlayerId == playerId);
+        }
     }
 }

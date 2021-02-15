@@ -53,7 +53,7 @@ namespace ChessGame.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            catch (PlayerNotFoundException ex)
+            catch (GameValidationException ex)
             {
                 _logger.LogError(ex, "The game contains invalid player ids");
                 ModelState.AddModelError("", ex.Message);
@@ -91,7 +91,7 @@ namespace ChessGame.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            catch (PlayerNotFoundException ex)
+            catch (GameValidationException ex)
             {
                 _logger.LogError(ex, "The game contains invalid player ids");
                 ModelState.AddModelError("", ex.Message);

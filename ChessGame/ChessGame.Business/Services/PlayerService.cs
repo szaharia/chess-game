@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ChessGame.Business.Contracts.Models;
 using ChessGame.Business.Contracts.Services;
+using ChessGame.Business.InternalClasses;
 using ChessGame.Data.Contracts;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -59,12 +60,22 @@ namespace ChessGame.Business.Services
                 return;
             }
 
+            if (await _playerRepository.PlayerHasGamesAsync(playerId))
+            {
+                throw new UndeleteablePlayerException("Cannot delete player, since it has existing games");
+            }
+
             await _playerRepository.DeleteAsync(player);
         }
 
         public async Task<bool> SaveChangesAsync()
         {
             return await _playerRepository.SaveChangesAsync();
+        }
+
+        public async Task<bool> PlayerHasGamesAsync(int playerId)
+        {
+            return await _playerRepository.PlayerHasGamesAsync(playerId);
         }
     }
 }

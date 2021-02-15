@@ -46,13 +46,16 @@ namespace ChessGame.Business.Services
         }
         public async Task CreateAsync(Game game)
         {
+            if (game.WhitePlayerId == game.BlackPlayerId)
+                throw new GameValidationException("White player cannot be the same as black player");
+
             var whitePlayer = await _playerRepository.GetByIdAsync(game.WhitePlayerId);
             if (whitePlayer == null)
-                throw new PlayerNotFoundException("Invalid White Player id");
+                throw new GameValidationException("Invalid White Player id");
 
             var blackPlayer = await _playerRepository.GetByIdAsync(game.BlackPlayerId);
             if (blackPlayer == null)
-                throw new PlayerNotFoundException("Invalid Black Player id");
+                throw new GameValidationException("Invalid Black Player id");
 
             await _gameRepository.CreateAsync(_mapper.Map<Data.Contracts.Entities.Game>(game));
         }
@@ -70,13 +73,16 @@ namespace ChessGame.Business.Services
 
         public async Task EditAsync(Game game)
         {
+            if (game.WhitePlayerId == game.BlackPlayerId)
+                throw new GameValidationException("White player cannot be the same as black player");
+
             var whitePlayer = await _playerRepository.GetByIdAsync(game.WhitePlayerId);
             if (whitePlayer == null)
-                throw new PlayerNotFoundException("Invalid White Player id");
+                throw new GameValidationException("Invalid White Player id");
 
             var blackPlayer = await _playerRepository.GetByIdAsync(game.BlackPlayerId);
             if (blackPlayer == null)
-                throw new PlayerNotFoundException("Invalid Black Player id");
+                throw new GameValidationException("Invalid Black Player id");
 
             await _gameRepository.EditAsync(_mapper.Map<Data.Contracts.Entities.Game>(game));
         }

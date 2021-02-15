@@ -14,6 +14,7 @@ namespace ChessGame.Data.Contracts
         Task EditAsync(Player player);
         Task DeleteAsync(Player player);
         Task<bool> SaveChangesAsync();
+        Task<bool> PlayerHasGamesAsync(int playerId);
     }
 
 }
