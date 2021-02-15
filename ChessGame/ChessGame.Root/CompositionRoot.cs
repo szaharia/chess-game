@@ -16,13 +16,12 @@ namespace ChessGame.Root
 
         public static void InjectDependencies(IServiceCollection services, IConfiguration configuration)
         {
-            // ChessGame.Data dependencies
+            // DAL SERVICES
             services.AddScoped<IPlayerRepository, PlayerRepository>();
-            services.AddScoped<IGameRepository, GameRepository>();
+            services.Decorate<IPlayerRepository, PlayerRepositoryWithLogging>();
 
-            // ChessGame.Business dependencies
-            services.AddScoped<IPlayerService, PlayerService>();
-            services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IGameRepository, GameRepository>();
+            services.Decorate<IGameRepository, GameRepositoryWithLogging>();
 
             // DBContext
             services.AddDbContext<AppDbContext>(options => 
@@ -30,13 +29,17 @@ namespace ChessGame.Root
                     configuration.GetConnectionString("WatersChessGameConnection"),
                     sqlServerOptionsAction => sqlServerOptionsAction.MigrationsAssembly("ChessGame.Data")));
 
-            // force database to start up
+            // force database to be created
             services.AddHostedService<DatabaseStartup>();
 
-            // Automapper
+            // BLL SERVICES
+            services.AddScoped<IPlayerService, PlayerService>();
+            services.Decorate<IPlayerService, PlayerServiceWithLogging>();
+
+            services.AddScoped<IGameService, GameService>();
+            services.Decorate<IGameService, GameServiceWithLogging>();
+
             services.AddAutoMapper(Assembly.GetAssembly(typeof(PlayerService)));
-
-
         }
     }
 }
