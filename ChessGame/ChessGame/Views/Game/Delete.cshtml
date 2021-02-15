@@ -1,4 +1,5 @@
-﻿@model Game
+﻿@using ChessGame.InternalClasses
+@model Game
 
 @{
     ViewData["Title"] = "Delete Game";
@@ -9,7 +10,7 @@
 <div class="row mb-1">
     <div class="col-md-6">
         <form asp-action="Delete">
-            <span >Are you sure you want to delete the @Model.Date game between @Model.WhitePlayerId and @Model.BlackPlayerId?</span>
+            <span >Are you sure you want to delete the @Model.Date game between @Model.WhitePlayer.GetFullName() and @Model.BlackPlayer.GetFullName()?</span>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <input type="submit" value="Yes" class="btn btn-primary" />

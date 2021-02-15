@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using ChessGame.Business.Contracts.Models;
 using ChessGame.Business.Contracts.Services;
 using ChessGame.Business.InternalClasses;
+using ChessGame.InternalClasses.Game;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,12 +17,23 @@ namespace ChessGame.Controllers
     public class GameController : Controller
     {
         private readonly IGameService _gameService;
+        private readonly IPlayerService _playerService;
         private readonly ILogger<PlayerController> _logger;
+        private readonly INamedPlayersGetter _namedPlayersGetter;
+        private readonly INamedPlayersToSelectListConverter _namedPlayersToSelectListConverter;
 
-        public GameController(IGameService gameService, ILogger<PlayerController> logger)
+        public GameController(
+            IGameService gameService, 
+            IPlayerService playerService, 
+            ILogger<PlayerController> logger, 
+            INamedPlayersGetter namedPlayersGetter, 
+            INamedPlayersToSelectListConverter namedPlayersToSelectListConverter)
         {
             _gameService = gameService;
+            _playerService = playerService;
             _logger = logger;
+            _namedPlayersGetter = namedPlayersGetter;
+            _namedPlayersToSelectListConverter = namedPlayersToSelectListConverter;
         }
 
         public async Task<ActionResult> Index(string searchTerm)
@@ -38,6 +51,7 @@ namespace ChessGame.Controllers
 
         public IActionResult Create()
         {
+            PopulatePlayerLists(null,null);
             return View();
         }
 
@@ -63,6 +77,9 @@ namespace ChessGame.Controllers
                 _logger.LogError(ex, "There was an error creating a new game");
                 ModelState.AddModelError("", "Unable to create game");
             }
+
+            PopulatePlayerLists(game.WhitePlayerId, game.BlackPlayerId);
+
             return View(game);
         }
 
@@ -74,6 +91,9 @@ namespace ChessGame.Controllers
                 // either redirect to Index action, or display 404 (return NotFound() );
                 return RedirectToAction(nameof(Index));
             }
+
+            PopulatePlayerLists(game.WhitePlayerId, game.BlackPlayerId);
+
             return View(game);
         }
 
@@ -101,6 +121,8 @@ namespace ChessGame.Controllers
                 _logger.LogError(ex, "There was an error editing a game");
                 ModelState.AddModelError("", "Unable to edit game");
             }
+
+            PopulatePlayerLists(game.WhitePlayerId, game.BlackPlayerId);
             return View(game);
         }
 
@@ -142,6 +164,19 @@ namespace ChessGame.Controllers
             }
 
             return View(game);
+        }
+
+        private void PopulatePlayerLists(int? whitePlayerId, int? blackPlayerId)
+        {
+            var playersWithFullName = _namedPlayersGetter.Get().ToList();
+
+            ViewBag.WhitePlayerId = whitePlayerId.HasValue
+                ? _namedPlayersToSelectListConverter.Convert(playersWithFullName, whitePlayerId.Value)
+                : _namedPlayersToSelectListConverter.Convert(playersWithFullName);
+
+            ViewBag.BlackPlayerId = blackPlayerId.HasValue
+                ? _namedPlayersToSelectListConverter.Convert(playersWithFullName, blackPlayerId.Value)
+                : _namedPlayersToSelectListConverter.Convert(playersWithFullName);
         }
     }
 }

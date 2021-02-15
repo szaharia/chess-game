@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Game>
+﻿@using ChessGame.InternalClasses
+@model IEnumerable<Game>
 
 @{
     ViewData["Title"] = "View Games";
@@ -36,8 +37,8 @@
     {
 <tr>
     <td scope="row">@game.Date</td>
-    <td>@game.WhitePlayer.FirstName @game.WhitePlayer.LastName</td>
-    <td>@game.BlackPlayer.FirstName @game.BlackPlayer.LastName</td>
+    <td>@game.WhitePlayer.GetFullName()</td>
+    <td>@game.BlackPlayer.GetFullName()</td>
     <td>@game.OpeningClassification</td>
     <td>@EnumHelpers.GetDisplayName(game.Result)</td>
     <td>

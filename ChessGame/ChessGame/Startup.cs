@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ChessGame.InternalClasses.Game;
 using ChessGame.Root;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +28,9 @@ namespace ChessGame
             CompositionRoot.InjectDependencies(services, _configuration);
 
             services.AddControllersWithViews();
-            
+
+            services.AddScoped<INamedPlayersGetter, NamedPlayersGetter>();
+            services.AddScoped<INamedPlayersToSelectListConverter, NamedPlayersToSelectListConverter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
